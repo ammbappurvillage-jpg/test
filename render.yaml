@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: mraprguild-tmdb-telegram-bot
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.11
+      - key: BOT_TOKEN
+        sync: false
+      - key: TMDB_READ_ACCESS_TOKEN
+        sync: false
+      - key: MOVIE_SITE_URL_TEMPLATE
+        value: https://ottguild.online/movies/?s={query}
+      - key: TMDB_LANGUAGE
+        value: en-US
+      - key: TMDB_IMAGE_SIZE
+        value: w500
+      - key: STATUS_API_KEY
+        generateValue: true
+      - key: WEBHOOK_SECRET
+        generateValue: true
+      - key: ADMIN_IDS
+        value: ""

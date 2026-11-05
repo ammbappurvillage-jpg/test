@@ -1,0 +1,22 @@
+Mraprguild TMDB Telegram Bot - repair notes
+
+Fixed in this package:
+1. Added the missing FastAPI imports for HTMLResponse, StaticFiles, and Jinja2Templates.
+2. Defined absolute project, static, and template paths so Render's working directory does not break dashboard startup.
+3. Added clear startup checks for missing static/ or templates/ folders.
+4. Removed duplicate health endpoint and duplicate process-start timestamp initialization.
+5. Hardened application startup/shutdown cleanup for partial startup failures.
+6. Kept the Telegram webhook registered during graceful restarts to avoid a deployment race where an old instance could delete the new instance's webhook.
+7. Corrected the literal backslash-n at the end of the final requirements.txt line, which could make pip reject the Jinja2 dependency.
+8. Updated the README environment-variable and dashboard troubleshooting notes.
+
+Checks completed:
+- Python source compile check passed.
+- All requirements.txt entries parsed successfully.
+- Dashboard JavaScript syntax check passed.
+- WordPress plugin PHP syntax check passed.
+- FastAPI smoke test passed for /, /static/css/style.css, /static/js/dashboard.js,
+  /health, and unauthenticated protection on /api/status.
+
+Before deployment, set BOT_TOKEN and TMDB_READ_ACCESS_TOKEN in Render. Keep
+STATUS_API_KEY and WEBHOOK_SECRET private. The package does not include API keys.
