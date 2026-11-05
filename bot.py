@@ -103,8 +103,8 @@ async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
 
 
 app = FastAPI(
-    title="Mraprguild TMDB Telegram Bot",
-    description="Telegram movie search bot powered by TMDB.",
+    title="OTTGuild Telegram Bot",
+    description="Telegram movie search bot powered by Mraprguild.",
     version="1.0.1",
     lifespan=lifespan,
 )
@@ -136,7 +136,7 @@ async def dashboard_status() -> dict[str, object]:
             logger.exception("Dashboard Telegram status check failed")
 
     return {
-        "service": "Mraprguild TMDB Telegram Bot",
+        "service": "OTTGuild Telegram Bot",
         "status": "running" if application is not None and telegram_ok else "degraded",
         "telegram": "connected" if telegram_ok else "unavailable",
         "tmdb_configured": settings.tmdb_configured,
@@ -170,7 +170,7 @@ async def public_status(request: Request) -> dict[str, object]:
             logger.exception("Telegram status check failed")
 
     return {
-        "service": "Mraprguild TMDB Telegram Bot",
+        "service": "OTTGuild Telegram Bot",
         "status": "running" if application is not None and telegram_ok else "degraded",
         "telegram": "connected" if telegram_ok else "unavailable",
         "tmdb_configured": settings.tmdb_configured,
